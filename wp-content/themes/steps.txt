@@ -16,3 +16,18 @@ clear all themes
 8) create new file 'front-page.php'.
 9) create new file 'search.php'.
 10) create new file '404.php'.
+ ********************* Enqueuing CSS and JS to WordPress theme *********************
+ 1) create a new file 'header.php'
+ 2) create a new file 'footer.php'
+ 3) go to front-page.php:
+    {
+        <?php get_header(); ?>: a wp function grub the file header.php(look for this file )
+        <?php get_footer(); ?>: a wp function grub the file footer.php(look for this file )
+    }
+4) go to the header.php
+     include the wp_head(): for injecting css
+5) go to the footer.php
+      the wp_footer(): for injecting js
+6) see the functions.php how to enqueue css and js
+    - download the bootstrap and drag it to mytheme(folder theme)
+   
