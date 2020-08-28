@@ -1,0 +1,18 @@
+clear all themes
+********************* CORE TEMPLATES *********************
+1)create new folder 'mytheme'.
+2)create new file 'index.php' => is the first file that wordpress reload in template hierarchy.
+3)create new file 'style.css'
+    {
+        /**
+        Theme Name: -- 
+        Author:     --
+        **/
+    }
+4) create new file 'functions.php' "plugins" for css , js "enqueue it". core component
+5) create new file 'page.php'.
+6) create new file 'single.php'.
+7) create new file 'archive.php'.
+8) create new file 'front-page.php'.
+9) create new file 'search.php'.
+10) create new file '404.php'.
