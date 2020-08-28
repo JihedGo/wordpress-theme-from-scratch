@@ -30,4 +30,29 @@ clear all themes
       the wp_footer(): for injecting js
 6) see the functions.php how to enqueue css and js
     - download the bootstrap and drag it to mytheme(folder theme)
-   
+    *********************** Template Parts & Page Templates ********************
+   1) create new folder under mytheme called 'includes'
+    2) create a file 'section-content.php'
+    load some dummy data into home page with wordpress admin panel
+    3) in front-page.php:
+        {
+            get_template_part('includes/section','content') // to separte logic w keep it organized
+            
+        }
+    4) put this fragment code in section-content:{
+        <?php
+if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php the_content(); ?>
+<?php endwhile;
+else : endif; ?>
+    }
+    5) create a file 'about us ' from wp admin panel ' but is empty ? => front-page only shows for front-page
+        -> page.php : use the same code of front-page
+
+    ---- 
+    create a new file 'template-contactus.php':
+        with contact us in wp admin panel use page attribute an link it with this template
+        copy the same code of page under the notation of template name
+    6) front-page header:
+        rely with another header:
+            create a header-secondary.php and link it with get_header('secondary')
