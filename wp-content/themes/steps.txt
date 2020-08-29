@@ -56,3 +56,23 @@ else : endif; ?>
     6) front-page header:
         rely with another header:
             create a header-secondary.php and link it with get_header('secondary')
+    ********************* Navigation Menus *********************
+        in functions.php
+            add this snippet code : add_theme_support('menus');
+            the menu 'menus' will appear in sidebar of admin panel  
+                1) create a menu 'top bar'
+                2) create hook location for menu
+                    functions.php :
+                        register_nav_menus(array(
+                        // id           visual
+                        'top-menu' => 'Top Menu Location',
+                        'mobile-menu' => 'Mobile Menu Location'
+                        )
+                    );
+                3) in header.php header tag:
+                     <?php
+                        wp_nav_menu(
+                            array(
+                                'theme_location' => 'top-menu'
+                            )
+                        ); ?>

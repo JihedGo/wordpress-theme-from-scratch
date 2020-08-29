@@ -10,3 +10,16 @@
 </head>
 
 <body>
+    <header>
+        <div class="container">
+            <?php
+            wp_nav_menu(
+                array(
+                    //'menu' => 'Top Bar' - instead of using theme location
+                    'theme_location' => 'top-menu',
+                    'menu_class' => 'top-bar'
+
+                )
+            ); ?>
+        </div>
+    </header>
