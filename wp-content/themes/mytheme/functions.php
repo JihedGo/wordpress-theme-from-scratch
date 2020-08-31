@@ -44,6 +44,29 @@ add_action('wp_enqueue_scripts', 'load_js');
 add_theme_support('menus');
 // to allows to add images to our blogposts
 add_theme_support('post-thumbnails');
+// to activate the widgets
+add_theme_support('widgets');
+
+function my_sidebars()
+{
+    register_sidebar(
+        array(
+            'name' => 'Page Sidebar',
+            'id' => 'page-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>'
+        )
+    );
+    register_sidebar(
+        array(
+            'name' => 'Blog Sidebar',
+            'id' => 'blog-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>'
+        )
+    );
+}
+add_action('widgets_init', 'my_sidebars');
 
 // Menus
 register_nav_menus(

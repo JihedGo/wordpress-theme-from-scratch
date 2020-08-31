@@ -143,3 +143,32 @@ else : endif; ?>
                              <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" class="img-fluid">
                         <?php endif; ?>
            <?php endwhile;
+
+           ********** Sidebars for Widgets **********
+           in functions.php
+           theme options
+            add_theme_support('widgets') => appearance => widgets
+           register sidebars:
+           function my_sidebars(){
+               register_sidebar(
+                   array(
+                       'name'=>'Page Sidebar',
+                       'id' => 'page-sidebar',
+                       'before_title'=>'<h4 class="widget-title">',
+                       'after_title'=>'</h4>'
+                   )
+               );
+               register_sidebar(
+                   array(
+                       'name'=>'Blog Sidebar',
+                       'id' => 'blog-sidebar',
+                       'before_title'=>'<h4 class="widget-title">',
+                       'after_title'=>'</h4>'
+                   )
+               );
+           }
+           add_action('widgets_init','my_sidebars')
+           in page.php:
+           <?php if(is_active_sidebar('page-sidebar')): ?>
+                <?php dynamic_sidebar('page-sidebar') ?>
+           <?php endif; ?>
