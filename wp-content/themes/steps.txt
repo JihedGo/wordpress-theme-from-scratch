@@ -76,3 +76,70 @@ else : endif; ?>
                                 'theme_location' => 'top-menu'
                             )
                         ); ?>
+******************** Blog Archive, Posts, Pagination, Thumbnails   *********************
+        single.php for single post.
+        admin panel: create a new post 'posts' and create a categorie for it 'blog'
+                     in appearance menus add categories it will appear on the menu but it is a blanc page
+                        the first part of the blog is the archive
+                            .../category/blog using the default archive.php
+                            -> copy the code of the page.php and paste into archive.php
+                            create a new file in include : section-archive.php
+                                copy the content of section-content
+                                in archive.php get_template_part('section','archive');
+                                in section-archive.php instead of content -> excerpt() for small post 
+                                add a link of a post: 
+                                    <a href="<?php the_permalink(); ?>"></a>
+        PAGINATION:
+        in archive.php
+        under get_template_part();
+        <?php previous_posts_link(); ?>
+        <?php next_posts_link(); ?> because  we have not yet  told wordpress that we want to limit this posts 
+        settings -> reading -> 3 posts 
+        in the other hand we can paginate with this:
+        <?php
+            global $wp_query;
+            $big = 999999999
+            echo paginate_links(array(
+                'base'=>str_replace($big, "%#%", esc_url(get_pagenum_link($big))),
+                'format'=>'?page=%#%',
+                'current' => max(1, get_query_var('paged')),
+                'total'=>$wp_query->max_num_pages
+            ));     
+        ?>
+        with single.php
+            copy the same code of section-content but instead of tempate part content -> blogcontent
+            <?php
+                if (have_posts()) : while (have_posts()) : the_post(); ?>
+                        <?php echo get_the_date('d/m/Y h:i:s'); ?>
+                        <?php the_content(); ?>
+                        <?php
+                        $fname = get_the_author_meta('first_name');
+                        $lname = get_the_author_meta('last_name');
+                        echo 'Posted by ' . $fname . ' ' . $lname;
+                        ?>
+                        to get the tags associeted
+                        <?php
+                            $tags = get_the_tags();
+                            foreach($tags as $tag):?>
+                            <?php echo get_tag_link($tag->term_id) ?>: get url of post id
+                            <?php echo $tag->name ?> : get the name of tag
+                        <?php endforeach;?>
+                        to get the categorie associted
+                        <?php
+                            $categories = get_the_categorie();
+                            foreach($categories as $cat):?>
+                            <?php echo get_category_link($cat->term_id) ?>
+                            <?php echo $cat->name ?>
+                        <?php endforeach;?>
+                         to get the comments:
+                         <?php comments_template() ?>
+                         to get the pages of a single post:
+                         single.php
+                         <?php 
+                            wp_link_pages();
+                         ?>
+                         thumbnail
+                         <?php if (has_post_thumbnail()) : ?>
+                             <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" class="img-fluid">
+                        <?php endif; ?>
+           <?php endwhile;
